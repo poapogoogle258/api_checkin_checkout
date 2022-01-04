@@ -1,11 +1,14 @@
-//Check-In/Out
+//Check-In/Outhttps://github.com/pulls
 
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-mongoose.connect('mongodb://meeting:meeting12#$@127.0.0.1:27017/testAPI')
+mongoose.connect('mongodb://127.0.0.1:27017/testAPI',{
+    user : "meeting",
+    pass : "meeting12#$"
+})
 // Model 
 const Schema = new mongoose.Schema({
     'action':String,
