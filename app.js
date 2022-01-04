@@ -5,7 +5,7 @@ const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-mongoose.connect('mongodb://localhost:27017/testAPI')
+mongoose.connect('mongodb://meeting:meeting12#$@127.0.0.1:27017/testAPI')
 // Model 
 const Schema = new mongoose.Schema({
     'action':String,
