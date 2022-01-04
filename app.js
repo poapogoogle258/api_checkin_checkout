@@ -22,14 +22,14 @@ app.use(cors())
 
 app.post('/checkin',(req,res)=>{
 
-    if(!(req.body.action && req.body.id && req.body.user)){
+    if(!(req.query.action && req.query.id && req.query.user && (req.query.action == 'CheckIn' || req.query.action == 'CheckOut'))){
         return res.status(400).send({
             status : 400,
             message : "bad request"
         })
     }
 
-    const post_data = new history_checkin({...req.body})    
+    const post_data = new history_checkin({...req.query})    
     post_data.save()
 
     return res.status(201).send({
@@ -38,14 +38,16 @@ app.post('/checkin',(req,res)=>{
 })
 
 app.get('/status',async (req,res)=>{
-    if(!(req.body.action && req.body.id)){
+
+    
+    if(!(req.query.id)){
         return res.status(400).send({
             status : 400,
             message : "bad request"
         })
     }
 
-    const get_data = await history_checkin.findOne({ id : req.body.id}).sort({'createdAt' : -1 }).exec();
+    const get_data = await history_checkin.findOne({ id : req.query.id}).sort({'createdAt' : -1 }).exec();
 
     return res.status(200).send({
         "status" : get_data?.action || null
@@ -53,7 +55,6 @@ app.get('/status',async (req,res)=>{
 
 })
 
-app.listen(3000,function(){
-    console.log('start in port 3000')
+app.listen(3004,function(){
+    console.log('start in port 3004')
 })
-
