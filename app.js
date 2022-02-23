@@ -25,7 +25,7 @@ app.use(cors())
 
 app.post('/checkin',(req,res)=>{
 
-    if(!(req.query.action && req.query.id && req.query.user && (req.query.action == 'CheckIn' || req.query.action == 'CheckOut' || req.query.action == 'TimeOut' ))){
+    if(!(req.query.action && req.query.id && req.query.user && (req.query.action == 'CheckIn' || req.query.action == 'CheckOut' || req.query.action == 'TimeOutCheckin' || req.query.action == "TimeOutEvent" ))){
         return res.status(400).send({
             status : 400,
             message : "bad request"
