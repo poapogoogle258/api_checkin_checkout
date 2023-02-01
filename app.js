@@ -31,6 +31,14 @@ app.post('/checkin',(req,res)=>{
             message : "bad request"
         })
     }
+    
+    const get_data = await history_checkin.findOne({ id : req.query.id}).sort({'createdAt' : -1 }).exec();
+    if(get_data && req.query.action === 'TimeOutCheckin' && get_data.action === 'CheckIn' ){
+        return res.status(406).send({
+            status : 406,
+            message : "Not Acceptable client"
+        })
+    }
 
     const post_data = new history_checkin({...req.query})    
     post_data.save()
