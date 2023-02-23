@@ -49,8 +49,6 @@ app.post('/checkin',(req,res)=>{
 })
 
 app.get('/status',async (req,res)=>{
-
-    
     if(!(req.query.id)){
         return res.status(400).send({
             status : 400,
@@ -64,6 +62,26 @@ app.get('/status',async (req,res)=>{
         "status" : get_data?.action || null
     })
 
+})
+
+app.delete('/status' , async( req, res) => {
+    if(!(req.query.id)){
+        return res.status(400).send({
+            status : 400,
+            message : "bad request"
+        })
+    }
+    
+    try{
+        await history_checkin.deleteMany({ id : req.query.id })
+        return res.status(200).send({status: 200 , success : true })
+    }catch(err){
+        return res.status(500).send({
+            status : 500,
+            message : err.message
+        })
+    }
+    
 })
 
 app.listen(3004,function(){
