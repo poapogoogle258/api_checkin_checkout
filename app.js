@@ -23,7 +23,7 @@ const history_checkin = mongoose.model('history_checkin', Schema);
 app.use(express.json())
 app.use(cors())
 
-app.post('/checkin',(req,res)=>{
+app.post('/checkin',async (req,res)=>{
 
     if(!(req.query.action && req.query.id && req.query.user && (req.query.action == 'CheckIn' || req.query.action == 'CheckOut' || req.query.action == 'TimeOutCheckin' || req.query.action == "TimeOutEvent" ))){
         return res.status(400).send({
