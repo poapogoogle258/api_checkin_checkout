@@ -64,7 +64,7 @@ app.get('/status',async (req,res)=>{
 
 })
 
-app.delete('/status' , async( req, res) => {
+app.delete('/status' , async (req, res) => {
     if(!(req.query.id)){
         return res.status(400).send({
             status : 400,
